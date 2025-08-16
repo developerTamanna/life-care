@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "question": "What is useState and how does it work in React?",
+      "answer": "useState is a React hook that allows you to add state to functional components. It returns a stateful value and a function to update it. When you call the update function, React re-renders the component with the new state value.",
+      "time": "2025-04-22T10:30:00"
+    },
+    {
+      "id": 2,
+      "question": "What is the purpose of useEffect in React?",
+      "answer": "useEffect is a hook used for managing side effects in functional components. It can run code after the component renders, like fetching data, updating the DOM, setting up subscriptions, and cleaning up before the component unmounts.",
+      "time": "2025-04-22T10:34:00"
+    },
+    {
+      "id": 3,
+      "question": "What is a custom hook in React and when should you use one?",
+      "answer": "A custom hook is a reusable JavaScript function that uses one or more React hooks. You should use a custom hook when you want to extract and reuse logic across multiple components, making your code more modular and maintainable.",
+      "time": "2025-04-22T10:38:00"
+    },
+    {
+      "id": 4,
+      "question": "Difference between controlled and uncontrolled components? Which one is better?",
+      "answer": "Controlled components are those where form data is handled by the React component state using useState or similar hooks. Uncontrolled components store their own state internally and use refs to access form values. Controlled components are generally preferred because they offer more control and predictable behavior.",
+      "time": "2025-04-22T10:42:00"
+    },
+    {
+      "id": 5,
+      "question": "Tell us something about useFormStatus() (explore and explain).",
+      "answer": "useFormStatus() is a hook from React's experimental form actions API, used to get the status of a form submission. It provides real-time feedback about the form, such as whether it is submitting or has submitted successfully. This is useful for handling UI feedback like loading spinners, error messages, or disabling submit buttons during submission.",
+      "time": "2025-04-22T10:47:00"
+    }
+  ]
+  
