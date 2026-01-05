@@ -16,15 +16,12 @@ const MainLayout = () => {
         </div>
       )}
 
-      {/* FULL WIDTH */}
       <Navbar />
 
-      {/* PAGE CONTENT ONLY */}
-      <main className="max-w-7xl mx-auto px-4 lg:px-6 my-6 min-h-[calc(100vh-200px)]">
+      <main className="min-h-[calc(100vh-200px)]">
         <Outlet />
       </main>
 
-      {/* FULL WIDTH */}
       <Footer />
     </div>
   );

@@ -4,14 +4,14 @@ import './index.css';
 
 import { router } from './Routes/Routes.jsx';
 import { RouterProvider } from 'react-router';
-import { ToastContainer } from 'react-toastify';  
-import 'react-toastify/dist/ReactToastify.css';  
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <>
       <RouterProvider router={router} />
-      <ToastContainer  
+      <ToastContainer
         position="top-center"
         autoClose={1500}
         hideProgressBar={false}

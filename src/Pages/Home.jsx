@@ -27,12 +27,12 @@ const Home = () => {
         <div>
            <Hero
            handleSearch ={handleSearch}
-           
+
            ></Hero>
          <div>
             <DoctorsContainer
             doctors = {doctors}
-            
+
             ></DoctorsContainer>
          </div>
             <BestServices></BestServices>
