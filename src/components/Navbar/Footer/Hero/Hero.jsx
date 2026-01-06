@@ -154,7 +154,7 @@ const Hero = ({ handleSearch }) => {
               >
                 <div className="inline-flex items-center space-x-2 mb-4">
                   <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  <span className="text-sm font-medium text-blue-600 uppercase tracking-wider">
+                  <span className="text-sm font-medium text-blue-600 uppercase tracking-wider mt-6">
                     Trusted Healthcare
                   </span>
                 </div>
@@ -221,7 +221,7 @@ const Hero = ({ handleSearch }) => {
                     </div>
                     <button
                       type="submit"
-                      className="px-8 py-3.5 bg-gray-900 text-white font-medium rounded-lg transition-all-300 hover:bg-black hover:shadow-lg active:scale-95"
+                      className="px-8 py-3.5 bg-blue-600 text-white font-medium rounded-lg transition-all-300 hover:bg-white hover:text-blue-600 hover:shadow-lg active:scale-95"
                     >
                       Search Now
                     </button>

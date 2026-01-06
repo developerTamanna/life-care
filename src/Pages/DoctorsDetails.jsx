@@ -1,28 +1,65 @@
 import React from 'react';
 import { Link, useLoaderData, useNavigate, useParams } from 'react-router';
+import { motion } from 'framer-motion';
 import { addBooking } from '../utils';
+import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaGraduationCap, FaStethoscope, FaRegHospital, FaIdCard, FaDollarSign, FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
 
 const DoctorsDetails = () => {
     const data = useLoaderData();
     const { id } = useParams();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    // Animation variants
+    const pageVariants = {
+        initial: { opacity: 0 },
+        animate: {
+            opacity: 1,
+            transition: { duration: 0.5 }
+        },
+        exit: { opacity: 0 }
+    };
+
+    const cardVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
 
     // Check if the id is a valid number
     if (!/^\d+$/.test(id)) {
         return (
-            <div className="min-h-[60vh] flex flex-col justify-center items-center text-center p-10 border-1 border-red-300 shadow-md mt-20">
-                <h2 className="text-2xl font-bold text-red-600 mb-3">No Doctor Found!!</h2>
-                <p className="text-gray-600 mb-5">
-                    No Doctor Found With Id-number. You entered:
-                    <span className="font-mono text-sm ml-1 text-blue-600">{id}</span>
-                </p>
-                <Link to="/">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                        View All Doctors
-                    </button>
-                </Link>
-            </div>
+            <motion.div
+                className="min-h-screen flex flex-col justify-center items-center text-center px-4 py-16 bg-gradient-to-b from-blue-50 to-white"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+            >
+                <div className="max-w-md mx-auto">
+                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Doctor Not Found</h2>
+                    <p className="text-gray-600 mb-6">
+                        The doctor ID <span className="font-mono bg-gray-100 px-2 py-1 rounded">{id}</span> is not valid.
+                    </p>
+                    <Link to="/">
+                        <motion.button
+                            className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center mx-auto"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <FaArrowLeft className="mr-2" />
+                            Back to Doctors
+                        </motion.button>
+                    </Link>
+                </div>
+            </motion.div>
         );
     }
 
@@ -31,18 +68,35 @@ const DoctorsDetails = () => {
 
     if (!singleDoctor) {
         return (
-            <div className="min-h-[60vh] flex flex-col justify-center items-center text-center p-10">
-                <h2 className="text-2xl font-bold text-red-600 mb-3">No Doctor Found!!</h2>
-                <p className="text-gray-600 mb-5">
-                No Doctor Found With Id-number:
-                    <span className="font-mono text-sm ml-1 text-blue-600">{id}</span>
-                </p>
-                <Link to="/bookings">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                        View All Doctors
-                    </button>
-                </Link>
-            </div>
+            <motion.div
+                className="min-h-screen flex flex-col justify-center items-center text-center px-4 py-16 bg-gradient-to-b from-blue-50 to-white"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+            >
+                <div className="max-w-md mx-auto">
+                    <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.998-.833-2.732 0L4.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                        </svg>
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Doctor Not Available</h2>
+                    <p className="text-gray-600 mb-6">
+                        The requested doctor is currently not available in our system.
+                    </p>
+                    <Link to="/">
+                        <motion.button
+                            className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center mx-auto"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <FaArrowLeft className="mr-2" />
+                            Browse Available Doctors
+                        </motion.button>
+                    </Link>
+                </div>
+            </motion.div>
         );
     }
 
@@ -53,7 +107,12 @@ const DoctorsDetails = () => {
         workplace,
         registration_number,
         availability,
-        fee, speciality
+        fee,
+        speciality,
+        experience,
+        bio,
+        rating,
+        totalPatients
     } = singleDoctor;
 
     const handleBooking = () => {
@@ -61,83 +120,263 @@ const DoctorsDetails = () => {
     };
 
     return (
-        <div className="p-5 bg-white rounded-2xl shadow-md mx-auto mt-10 lg:px-20">
-            <div className='bg-white rounded-xl p-5 shadow-sm'>
-                <h2 className="text-2xl font-semibold text-center mb-3">Doctor’s Profile Details</h2>
-                <p className="text-center text-gray-500 mb-8">
-                    We are dedicated to providing the best healthcare services to ensure your well-being.
-                    Consult with experienced doctors and take the right step towards a healthier life.
-                    Your health is our top priority.
-                </p>
+        <motion.div
+            className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageVariants}
+        >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Back Button */}
+                <motion.div
+                    className="mb-6"
+                    variants={cardVariants}
+                >
+                    <Link to="/">
+                        <button className="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                            <FaArrowLeft className="mr-2" />
+                            Back to Doctors List
+                        </button>
+                    </Link>
+                </motion.div>
+
+                {/* Doctor Profile Header */}
+                <motion.div
+                    className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8"
+                    variants={cardVariants}
+                >
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+                        {/* Doctor Image */}
+                        <div className="relative">
+                            <div className="w-40 h-40 rounded-xl overflow-hidden bg-gradient-to-br from-blue-50 to-gray-100 border-4 border-white shadow-lg">
+                                <img
+                                    src={image}
+                                    alt={name}
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                        e.target.src = 'https://via.placeholder.com/400x400/3B82F6/FFFFFF?text=DR';
+                                    }}
+                                />
+                            </div>
+                            <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                                Verified
+                            </div>
+                        </div>
+
+                        {/* Doctor Basic Info */}
+                        <div className="flex-1">
+                            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
+                                <div>
+                                    <h1 className="text-3xl font-bold text-gray-900 mb-1">{name}</h1>
+                                    <div className="flex items-center flex-wrap gap-2 mb-3">
+                                        <span className="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                                            <FaStethoscope className="mr-1" />
+                                            {speciality}
+                                        </span>
+                                        <span className="inline-flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                                            <FaClock className="mr-1" />
+                                            {experience || '10+'} Years Experience
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Consultation Fee */}
+                                <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl shadow-lg">
+                                    <div className="text-sm opacity-90">Consultation Fee</div>
+                                    <div className="text-2xl font-bold">{fee}</div>
+                                    <div className="text-xs opacity-80">Per session</div>
+                                </div>
+                            </div>
+
+                            {/* Education and Workplace */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div className="flex items-start">
+                                    <FaGraduationCap className="text-gray-400 mt-1 mr-3 flex-shrink-0" />
+                                    <div>
+                                        <div className="text-sm text-gray-500">Education</div>
+                                        <div className="font-medium text-gray-900">{education}</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-start">
+                                    <FaRegHospital className="text-gray-400 mt-1 mr-3 flex-shrink-0" />
+                                    <div>
+                                        <div className="text-sm text-gray-500">Hospital/Clinic</div>
+                                        <div className="font-medium text-gray-900">{workplace}</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-start">
+                                    <FaIdCard className="text-gray-400 mt-1 mr-3 flex-shrink-0" />
+                                    <div>
+                                        <div className="text-sm text-gray-500">Registration No</div>
+                                        <div className="font-medium text-gray-900">{registration_number}</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-start">
+                                    <FaMapMarkerAlt className="text-gray-400 mt-1 mr-3 flex-shrink-0" />
+                                    <div>
+                                        <div className="text-sm text-gray-500">Location</div>
+                                        <div className="font-medium text-gray-900">Dhaka, Bangladesh</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Rating and Patients */}
+                            <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100">
+                                <div className="flex items-center">
+                                    <div className="flex text-yellow-400">
+                                        {[...Array(5)].map((_, i) => (
+                                            <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                    <span className="ml-2 font-medium text-gray-900">
+                                        {rating || '4.8'} ({totalPatients || '1200+'} reviews)
+                                    </span>
+                                </div>
+                                <div className="text-gray-600">
+                                    <FaCheckCircle className="inline text-green-500 mr-1" />
+                                    {availability?.length || 5} days available per week
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Left Column - Doctor Details */}
+                    <div className="lg:col-span-2 space-y-8">
+                        {/* About Doctor */}
+                        <motion.div
+                            className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6"
+                            variants={cardVariants}
+                            transition={{ delay: 0.1 }}
+                        >
+                            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100">
+                                About Dr. {name?.split(' ')[0]}
+                            </h2>
+                            <p className="text-gray-600 leading-relaxed mb-4">
+                                {bio || `${name} is a highly experienced ${speciality} specialist with over ${experience || '10'} years of practice. With a patient-centered approach, Dr. ${name?.split(' ')[0]} combines advanced medical knowledge with compassionate care to provide the best treatment outcomes.`}
+                            </p>
+                            <p className="text-gray-600 leading-relaxed">
+                                Committed to ongoing professional development and staying updated with the latest medical advancements to ensure patients receive the most effective and up-to-date care available.
+                            </p>
+                        </motion.div>
+
+                        {/* Availability Schedule */}
+                        <motion.div
+                            className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6"
+                            variants={cardVariants}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100 flex items-center">
+                                <FaCalendarAlt className="mr-2 text-blue-600" />
+                                Availability Schedule
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                {availability?.map((day, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-4 text-center"
+                                        whileHover={{ scale: 1.02 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <div className="font-medium text-gray-900">{day}</div>
+                                        <div className="text-sm text-gray-600 mt-1">9:00 AM - 5:00 PM</div>
+                                        <div className="mt-2">
+                                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                                                <FaCheckCircle className="mr-1" />
+                                                Available
+                                            </span>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Column - Appointment Booking */}
+                    <div>
+                        <motion.div
+                            className="bg-gradient-to-b from-blue-50 to-white border border-blue-100 rounded-2xl shadow-lg p-6 sticky top-8"
+                            variants={cardVariants}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                                <FaCalendarAlt className="mr-2 text-blue-600" />
+                                Book Appointment
+                            </h2>
+
+                            {/* Availability Status */}
+                            <div className="mb-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-gray-700 font-medium">Current Status</span>
+                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">
+                                        <FaCheckCircle className="mr-1" />
+                                        Available Today
+                                    </span>
+                                </div>
+                                <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4">
+                                    <div className="flex items-start">
+                                        <svg className="w-5 h-5 text-yellow-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                        <p className="text-sm text-yellow-700">
+                                            Due to high patient volume, appointments are currently available for today only. We appreciate your understanding.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Price Summary */}
+                            <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                                <h3 className="font-medium text-gray-900 mb-3">Price Summary</h3>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>Consultation Fee</span>
+                                        <span>{fee}</span>
+                                    </div>
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>Service Charge</span>
+                                        <span>৳ 200</span>
+                                    </div>
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>VAT (15%)</span>
+                                        <span>৳ 150</span>
+                                    </div>
+                                    <div className="border-t border-gray-200 pt-2 mt-2">
+                                        <div className="flex justify-between font-bold text-gray-900">
+                                            <span>Total Amount</span>
+                                            <span>৳ 1,350</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Booking Button */}
+                            <motion.button
+                                onClick={handleBooking}
+                                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <FaCalendarAlt className="mr-2" />
+                                Book Appointment Now
+                            </motion.button>
+
+                            {/* Additional Info */}
+                            <div className="mt-6 text-center text-sm text-gray-500">
+                                <p className="mb-1">✅ Instant confirmation</p>
+                                <p className="mb-1">✅ 24/7 customer support</p>
+                                <p>✅ Free cancellation up to 24 hours</p>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
             </div>
-
-            <div className="flex flex-col lg:flex-row gap-5 items-center bg-white rounded-xl p-4 lg:p-5 shadow-sm mt-5">
-  <div className="w-32 h-32 lg:w-44 lg:h-44 rounded-xl overflow-hidden bg-gray-100 mx-auto lg:mx-0">
-    <img src={image} alt={name} className="w-full h-full object-contain" />
-  </div>
-
-  <div className="flex-grow text-center lg:text-left mt-4 lg:mt-0">
-    <h3 className="text-xl font-semibold text-gray-900 mb-1">{name}</h3>
-    <div className='flex gap-2'>
-    <p className="text-sm text-gray-700 mb-1">{education}</p>
-    <p className='text-sm text-blue-700 mb-1'>{speciality}</p>
-    </div>
-    <p className="text-sm text-gray-600 mb-1">
-      <span className="font-medium text-gray-800">Working at </span> {workplace}
-    </p>
-    <p className="flex justify-center lg:justify-start items-center text-sm text-gray-500 mb-3">
-      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5.121 17.804A9.968 9.968 0 0112 15c2.4 0 4.597.84 6.25 2.25m1.629-3.033A9.953 9.953 0 0021 12c0-5.523-4.477-10-10-10S1 6.477 1 12c0 1.8.477 3.488 1.316 4.938M15 19h6m0 0v-6m0 6l-6-6"
-        />
-      </svg>
-      Reg No: {registration_number}
-    </p>
-
-    <div className="mb-2">
-      <span className="font-medium text-gray-800">Availability: </span>
-      {availability.map((day, index) => (
-        <span key={index} className="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium px-3 py-1 rounded-full mr-2 mt-1">
-          {day}
-        </span>
-      ))}
-    </div>
-
-    <p className="text-sm text-gray-700">
-      <span className="font-medium">Consultation Fee:</span>{" "}
-      <span className="text-blue-600 font-bold">{fee}</span> (Incl. VAT)
-      <a href="#" className="text-blue-500 underline ml-1">Per consultation</a>
-    </p>
-  </div>
-</div>
-
-
-<div className="mt-6 p-4 sm:p-5 rounded-xl bg-white shadow-sm">
-  <h3 className="text-base sm:text-lg font-semibold mb-3">Book an Appointment</h3>
-
-  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0 mb-4">
-    <p className="text-sm font-medium text-gray-800">Availability</p>
-    <span className="bg-green-100 text-green-600 px-3 py-1 text-xs rounded-full text-center w-max">
-      Doctor Available Today
-    </span>
-  </div>
-
-  <p className="text-xs text-yellow-700 bg-yellow-50 p-2 rounded mb-4">
-    ⚠️ Due to high patient volume, we are currently accepting appointments for today only. We appreciate your understanding and cooperation.
-  </p>
-
-  
-    <button
-      onClick={handleBooking}
-      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
-      Book Appointment Now
-    </button>
-
-</div>
-
-        </div>
+        </motion.div>
     );
 };
 

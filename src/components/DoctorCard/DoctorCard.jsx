@@ -1,59 +1,83 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router';
 
 const DoctorCard = ({ doctor }) => {
-  const { image, name, education, experience, registration_number, availabilityBadge, id, speciality} = doctor || {};
+  const {
+    image,
+    name,
+    education,
+    experience,
+    registration_number,
+    availabilityBadge,
+    id,
+    speciality,
+  } = doctor || {};
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
+    hover: {
+      y: -6,
+      scale: 1.02,
+      transition: { duration: 0.3, ease: 'easeInOut' },
+    },
+    tap: { scale: 0.98 },
+  };
 
   return (
-    <div className="w-full  p-4 bg-white rounded-2xl shadow-lg">
-      <div className="w-full h-48 flex items-center justify-center bg-gray-100 rounded-xl mb-4">
-        <img
-          src={image}
-          alt={name}
-          className="h-full object-contain"
-        />
+    <motion.div
+      className="relative w-full p-4 bg-white rounded-2xl shadow-lg border border-gray-100"
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      whileTap="tap"
+    >
+      {/* Image */}
+      <div className="w-full h-48 flex items-center justify-center bg-gray-50 rounded-xl mb-4 overflow-hidden">
+        <img src={image} alt={name} className="h-full object-contain" />
       </div>
 
-      <div className="flex gap-2 mb-2">
+      {/* Badges */}
+      <div className="flex gap-2 mb-3">
         {availabilityBadge && (
-          <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
+          <span className="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border">
             {availabilityBadge}
           </span>
         )}
-        <span className="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">
+        <span className="bg-blue-50 text-blue-700 text-xs px-3 py-1.5 rounded-full border">
           {experience} Experience
         </span>
       </div>
 
-      <h3 className="text-lg font-semibold text-gray-800 mb-1">{name}</h3>
-      <div className='flex gap-2'>
-      <p className="text-sm text-gray-600 mb-2">{education}</p>
-      <p className='text-sm text-blue-600 mb-2'>{speciality}</p>
-      </div>
+      <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
 
-      <p className="flex items-center text-sm text-gray-500 mb-4">
-        <svg
-          className="w-4 h-4 mr-1"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5.121 17.804A9.968 9.968 0 0112 15c2.4 0 4.597.84 6.25 2.25m1.629-3.033A9.953 9.953 0 0021 12c0-5.523-4.477-10-10-10S1 6.477 1 12c0 1.8.477 3.488 1.316 4.938M15 19h6m0 0v-6m0 6l-6-6"
-          />
-        </svg>
+      <p className="text-sm text-gray-600">{education}</p>
+      <p className="text-sm font-medium text-blue-600 mb-3">{speciality}</p>
+
+      <p className="text-sm text-gray-500 mb-5">
         Reg No: {registration_number}
       </p>
 
+      {/* Button */}
       <Link to={`/doctor-details/${id}`}>
-      <button className="w-full text-center py-2 rounded-full border border-blue-500 text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition cursor-pointer">
-        View Details
-      </button>
+        <button className="w-full py-3 rounded-full border-2 border-blue-500 text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition">
+          View Details
+        </button>
       </Link>
-    </div>
+
+      {/* 🔥 FIXED Overlay (click block করবে না) */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-blue-50/50 to-transparent rounded-2xl opacity-0"
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.div>
   );
 };
 
