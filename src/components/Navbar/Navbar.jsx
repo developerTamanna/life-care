@@ -7,7 +7,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // 30px স্ক্রল হলে হালকা শ্যাডো আসবে
+
       setScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll);
@@ -21,8 +21,8 @@ const Navbar = () => {
     <nav
       className={`w-full sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-sm border-b border-gray-100' // হালকা বর্ডার, হালকা শ্যাডো
-          : 'bg-transparent' // সম্পূর্ণ ট্রান্সপারেন্ট
+          ? 'bg-white/95 backdrop-blur-sm border-b border-gray-100' 
+          : 'bg-transparent'
       }`}
     >
       {/* Container with proper spacing */}

@@ -1,26 +1,25 @@
-import {
-  createBrowserRouter,
-} from "react-router";
-import Home from "../Pages/Home";
-import MainLayout from "../Layouts/MainLayout";
-import MyBooKing from "../Pages/MyBooKing";
-import DoctorsDetails from "../Pages/DoctorsDetails";
-import ErrorPage from "../Pages/ErrorPage";
-import Blogs from "../Pages/Blogs";
+import { createBrowserRouter } from 'react-router';
+import MainLayout from '../Layouts/MainLayout';
+import Blogs from '../Pages/Blogs';
+import contact from '../Pages/contact';
+import DoctorsDetails from '../Pages/DoctorsDetails';
+import ErrorPage from '../Pages/ErrorPage';
+import Home from '../Pages/Home';
+import MyBooKing from '../Pages/MyBooKing';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     Component: MainLayout,
     hydrateFallbackElement: (
       <div className="flex items-center justify-center w-full h-screen">
         <span className="loading loading-spinner loading-xl"></span>
       </div>
-    ),  
-    errorElement: <ErrorPage />,  
+    ),
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: '/',
         Component: Home,
         loader: () => fetch('../doctors.json'),
       },
@@ -32,6 +31,10 @@ export const router = createBrowserRouter([
         path: 'blogs',
         Component: Blogs,
         loader: () => fetch('../blogs.json'),
+      },
+      {
+        path: 'contact',
+        Component: contact,
       },
       {
         path: '/doctor-details/:id',
