@@ -1,33 +1,66 @@
 [
-    {
-      "id": 1,
-      "question": "What is useState and how does it work in React?",
-      "answer": "useState is a React hook that allows you to add state to functional components. It returns a stateful value and a function to update it. When you call the update function, React re-renders the component with the new state value.",
-      "time": "2025-04-22T10:30:00"
-    },
-    {
-      "id": 2,
-      "question": "What is the purpose of useEffect in React?",
-      "answer": "useEffect is a hook used for managing side effects in functional components. It can run code after the component renders, like fetching data, updating the DOM, setting up subscriptions, and cleaning up before the component unmounts.",
-      "time": "2025-04-22T10:34:00"
-    },
-    {
-      "id": 3,
-      "question": "What is a custom hook in React and when should you use one?",
-      "answer": "A custom hook is a reusable JavaScript function that uses one or more React hooks. You should use a custom hook when you want to extract and reuse logic across multiple components, making your code more modular and maintainable.",
-      "time": "2025-04-22T10:38:00"
-    },
-    {
-      "id": 4,
-      "question": "Difference between controlled and uncontrolled components? Which one is better?",
-      "answer": "Controlled components are those where form data is handled by the React component state using useState or similar hooks. Uncontrolled components store their own state internally and use refs to access form values. Controlled components are generally preferred because they offer more control and predictable behavior.",
-      "time": "2025-04-22T10:42:00"
-    },
-    {
-      "id": 5,
-      "question": "Tell us something about useFormStatus() (explore and explain).",
-      "answer": "useFormStatus() is a hook from React's experimental form actions API, used to get the status of a form submission. It provides real-time feedback about the form, such as whether it is submitting or has submitted successfully. This is useful for handling UI feedback like loading spinners, error messages, or disabling submit buttons during submission.",
-      "time": "2025-04-22T10:47:00"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "question": "What should I do if I experience chest pain?",
+    "answer": "Chest pain should never be ignored. If you experience sudden, severe chest pain, especially if it radiates to your arm, jaw, or back, accompanied by shortness of breath, sweating, or nausea, seek emergency medical attention immediately. For mild or recurring chest pain, consult a cardiologist for proper evaluation. Common causes include heart conditions, acid reflux, muscle strain, or anxiety. Always err on the side of caution with chest pain symptoms.",
+    "time": "2024-01-15",
+    "category": "Emergency",
+    "readTime": "2 min read"
+  },
+  {
+    "id": 2,
+    "question": "How often should I get a general health check-up?",
+    "answer": "For healthy adults under 40, a comprehensive health check-up every 2-3 years is recommended. Adults 40 and above should have annual check-ups. However, frequency may vary based on individual risk factors, family history, and existing health conditions. Essential screenings include blood pressure, cholesterol, blood sugar, and cancer screenings as age-appropriate. Regular check-ups help in early detection and prevention of potential health issues.",
+    "time": "2024-01-10",
+    "category": "Preventive Care",
+    "readTime": "3 min read"
+  },
+  {
+    "id": 3,
+    "question": "What are the warning signs of a stroke?",
+    "answer": "Remember the acronym FAST for stroke symptoms: Face drooping, Arm weakness, Speech difficulty, Time to call emergency. Other symptoms include sudden numbness, confusion, trouble walking, severe headache, and vision problems. If you notice any of these symptoms, call emergency services immediately. Early intervention is crucial as treatment is most effective within the first few hours. Stroke can happen at any age, so awareness is important for everyone.",
+    "time": "2024-01-05",
+    "category": "Neurology",
+    "readTime": "2 min read"
+  },
+  {
+    "id": 4,
+    "question": "How can I manage stress for better mental health?",
+    "answer": "Effective stress management includes regular exercise, adequate sleep (7-9 hours), mindfulness meditation, and maintaining social connections. Set realistic goals, practice time management, and learn to say no when needed. Professional help through therapy or counseling can be beneficial for chronic stress. Remember that seeking help is a sign of strength, not weakness. Small, consistent practices daily can significantly improve mental well-being.",
+    "time": "2024-01-01",
+    "category": "Mental Health",
+    "readTime": "4 min read"
+  },
+  {
+    "id": 5,
+    "question": "What vaccinations do adults need?",
+    "answer": "Essential adult vaccinations include: Influenza (annually), Tdap/Td (every 10 years), Shingles (after 50), Pneumococcal (after 65), COVID-19 (as recommended), HPV (up to age 45), and Hepatitis B. Additional vaccines may be needed based on travel plans, occupation, or health conditions. Consult your healthcare provider for a personalized vaccination schedule. Vaccines are crucial preventive measures that protect both individuals and communities.",
+    "time": "2023-12-28",
+    "category": "Immunization",
+    "readTime": "3 min read"
+  },
+  {
+    "id": 6,
+    "question": "When should I consider seeing a specialist?",
+    "answer": "Consider seeing a specialist when: 1) Your primary care doctor recommends it, 2) You have persistent symptoms despite treatment, 3) You need advanced diagnostic testing, 4) You have a complex or rare condition, 5) You require surgical intervention, or 6) You need second opinion. Common specialists include cardiologists, neurologists, gastroenterologists, and orthopedic surgeons. Always start with your primary care physician who can provide appropriate referrals.",
+    "time": "2023-12-25",
+    "category": "General",
+    "readTime": "2 min read"
+  },
+  {
+    "id": 7,
+    "question": "What are healthy blood pressure ranges?",
+    "answer": "Optimal blood pressure is below 120/80 mmHg. Normal range is 120-129/80-84. High normal is 130-139/85-89. Hypertension Stage 1 is 140-159/90-99, and Stage 2 is 160+/100+. Regular monitoring is essential as high blood pressure often has no symptoms. Lifestyle modifications include reducing salt intake, regular exercise, maintaining healthy weight, limiting alcohol, and managing stress. Medication may be necessary if lifestyle changes aren't sufficient.",
+    "time": "2023-12-20",
+    "category": "Cardiology",
+    "readTime": "3 min read"
+  },
+  {
+    "id": 8,
+    "question": "How can I improve my sleep quality naturally?",
+    "answer": "Improve sleep by establishing a consistent sleep schedule, creating a dark and quiet bedroom environment, avoiding screens before bedtime, limiting caffeine and heavy meals in the evening, engaging in regular physical activity, and practicing relaxation techniques. Aim for 7-9 hours of quality sleep. If sleep problems persist, consult a healthcare provider as poor sleep can impact overall health, including cardiovascular function and immune system.",
+    "time": "2023-12-15",
+    "category": "Sleep Health",
+    "readTime": "3 min read"
+  }
+]
